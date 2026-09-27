@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURUM — Build Work That Matters.</title>
+
+<style>
+:root{
+  --paper:#efede7;
+  --paper2:#e5e1d8;
+  --ink:#0d0e0f;
+  --muted:#77756e;
+  --line:#c7c3ba;
+  --dark:#0c0e10;
+  --dark2:#15191d;
+  --darkLine:#34383c;
+  --blue:#526d86;
+  --white:#f4f1e9;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+body::selection{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+.container{
+  width:min(1280px,calc(100% - 64px));
+  margin:auto;
+}
+
+.label{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:var(--muted);
+}
+
+/* ================= NAV ================= */
+
+.nav{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:50;
+  padding:28px 0;
+}
+
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.075em;
+}
+
+.logo span{
+  font-weight:400;
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+.nav-link{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  opacity:.5;
+  transition:.25s ease;
+}
+
+.nav-link:hover{
+  opacity:1;
+}
+
+.nav-cta{
+  border:1px solid var(--ink);
+  padding:11px 17px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  transition:.3s ease;
+}
+
+.nav-cta:hover{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:100vh;
+  padding:150px 0 65px;
+  display:flex;
+  align-items:flex-end;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 350px;
+  gap:80px;
+  align-items:end;
+  position:relative;
+  z-index:5;
+}
+
+.hero-kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:35px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:var(--muted);
+}
+
+.hero-kicker i{
+  width:28px;
+  height:1px;
+  background:var(--ink);
+}
+
+.hero-title{
+  font-size:clamp(82px,13.7vw,192px);
+  line-height:.67;
+  letter-spacing:-.11em;
+  font-weight:500;
+}
+
+.hero-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.hero-side{
+  padding-bottom:8px;
+}
+
+.hero-side p{
+  max-width:330px;
+  font-size:17px;
+  line-height:1.5;
+  margin-bottom:34px;
+}
+
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  min-width:210px;
+  padding:16px 18px;
+  background:var(--ink);
+  color:var(--paper);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  transition:
+    transform .35s cubic-bezier(.2,.7,.2,1),
+    background .35s ease;
+}
+
+.button:hover{
+  transform:translateY(-4px);
+  background:var(--blue);
+}
+
+.button span{
+  transition:transform .35s ease;
+}
+
+.button:hover span{
+  transform:translate(4px,-4px);
+}
+
+/* Hero geometry */
+
+.hero-art{
+  position:absolute;
+  width:680px;
+  height:680px;
+  right:-235px;
+  top:10%;
+  border:1px solid rgba(13,14,15,.11);
+  border-radius:50%;
+  animation:heroRotate 34s linear infinite;
+  z-index:1;
+}
+
+.hero-art::before{
+  content:"";
+  position:absolute;
+  inset:75px;
+  border:1px solid rgba(13,14,15,.075);
+  border-radius:50%;
+}
+
+.hero-art::after{
+  content:"A";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Georgia,serif;
+  font-size:275px;
+  opacity:.04;
+}
+
+.hero-mark{
+  position:absolute;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--blue);
+  left:50%;
+  top:17%;
+}
+
+.hero-axis{
+  position:absolute;
+  width:1px;
+  height:100vh;
+  background:rgba(13,14,15,.045);
+  right:16%;
+  top:0;
+}
+
+@keyframes heroRotate{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* ================= TICKER ================= */
+
+.ticker{
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  padding:15px 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+.ticker-track{
+  display:inline-flex;
+  gap:55px;
+  animation:ticker 28s linear infinite;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+}
+
+.ticker-track span:nth-child(4n){
+  color:var(--blue);
+}
+
+@keyframes ticker{
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+  padding:185px 0;
+}
+
+.intro-grid{
+  display:grid;
+  grid-template-columns:180px minmax(0,1fr);
+  gap:80px;
+}
+
+.intro-title{
+  max-width:1050px;
+  font-size:clamp(55px,7.35vw,106px);
+  line-height:.85;
+  letter-spacing:-.09em;
+  font-weight:500;
+}
+
+.intro-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+/* ================= STATEMENT ================= */
+
+.statement{
+  background:var(--dark);
+  color:var(--paper);
+  padding:180px 0;
+}
+
+.statement-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:110px;
+}
+
+.statement-title{
+  font-size:clamp(65px,9.1vw,132px);
+  line-height:.73;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.statement-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.statement-copy{
+  max-width:410px;
+  padding-top:14px;
+}
+
+.statement-copy p{
+  color:#aaa9a2;
+  font-size:17px;
+  line-height:1.65;
+}
+
+.rule{
+  height:1px;
+  background:var(--darkLine);
+  margin:48px 0;
+}
+
+/* ================= METHOD ================= */
+
+.method{
+  padding:180px 0;
+}
+
+.method-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 340px;
+  gap:80px;
+  align-items:end;
+  margin-bottom:95px;
+}
+
+.method-title{
+  font-size:clamp(66px,8.4vw,118px);
+  line-height:.75;
+  letter-spacing:-.1em;
+  font-weight:500;
+}
+
+.method-copy{
+  font-size:14px;
+  line-height:1.65;
+  color:var(--muted);
+}
+
+.method-list{
+  border-top:1px solid var(--ink);
+}
+
+.method-item{
+  display:grid;
+  grid-template-columns:70px 1fr 1fr;
+  gap:30px;
+  padding:42px 0;
+  border-bottom:1px solid var(--ink);
+  transition:
+    padding .4s cubic-bezier(.2,.7,.2,1),
+    background .4s ease;
+}
+
+.method-item:hover{
+  padding-left:14px;
+  padding-right:14px;
+  background:rgba(255,255,255,.2);
+}
+
+.method-number{
+  font-size:9px;
+  color:var(--muted);
+}
+
+.method-item h3{
+  font-size:29px;
+  font-weight:500;
+  letter-spacing:-.05em;
+}
+
+.method-item p{
+  max-width:430px;
+  font-size:14px;
+  line-height:1.65;
+  color:var(--muted);
+}
+
+/* ================= VISUAL ================= */
+
+.visual-section{
+  padding-bottom:180px;
+}
+
+.visual{
+  min-height:760px;
+  position:relative;
+  overflow:hidden;
+  background:var(--dark2);
+  color:var(--paper);
+  display:flex;
+  align-items:flex-end;
+  padding:65px;
+}
+
+.visual-grid{
+  position:absolute;
+  inset:0;
+  opacity:.085;
+  background-image:
+    linear-gradient(to right,#d9d4ca 1px,transparent 1px),
+    linear-gradient(to bottom,#d9d4ca 1px,transparent 1px);
+  background-size:80px 80px;
+}
+
+.visual-frame{
+  position:absolute;
+  left:11%;
+  top:13%;
+  width:57%;
+  height:66%;
+  border:1px solid #353b41;
+}
+
+.visual-frame::before{
+  content:"SYSTEM / 01";
+  position:absolute;
+  top:16px;
+  left:18px;
+  font-size:8px;
+  letter-spacing:.2em;
+  color:#666c72;
+}
+
+.visual-frame::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:1px;
+  height:100%;
+  background:#353b41;
+}
+
+.visual-line{
+  position:absolute;
+  left:16%;
+  top:48%;
+  width:285px;
+  height:1px;
+  background:var(--blue);
+  transform:rotate(-25deg);
+  transform-origin:left;
+}
+
+.visual-copy{
+  position:relative;
+  z-index:5;
+  max-width:730px;
+}
+
+.visual-label{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#777c81;
+  margin-bottom:25px;
+}
+
+.visual-title{
+  font-size:clamp(68px,9.7vw,140px);
+  line-height:.71;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.visual-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+/* ================= COURSE ================= */
+
+.course{
+  background:var(--paper2);
+  padding:180px 0;
+}
+
+.course-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 370px;
+  gap:100px;
+  margin-bottom:95px;
+}
+
+.course-title{
+  font-size:clamp(72px,9.1vw,132px);
+  line-height:.72;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.course-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.course-copy{
+  padding-top:10px;
+  font-size:15px;
+  line-height:1.65;
+}
+
+.course-meta{
+  display:flex;
+  gap:30px;
+  margin-top:35px;
+  flex-wrap:wrap;
+}
+
+.meta{
+  border-left:1px solid #858178;
+  padding-left:13px;
+}
+
+.meta strong{
+  display:block;
+  font-size:18px;
+  font-weight:500;
+}
+
+.meta span{
+  display:block;
+  margin-top:4px;
+  font-size:9px;
+  color:#737068;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+
+/* Course product */
+
+.course-product{
+  min-height:690px;
+  background:var(--dark);
+  color:var(--paper);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.product-left{
+  padding:65px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+}
+
+.product-left::after{
+  content:"A";
+  position:absolute;
+  right:-20px;
+  bottom:-100px;
+  font-family:Georgia,serif;
+  font-size:420px;
+  line-height:1;
+  color:#fff;
+  opacity:.025;
+}
+
+.product-tag{
+  position:relative;
+  z-index:2;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#70767b;
+}
+
+.product-title{
+  position:relative;
+  z-index:2;
+  font-size:clamp(63px,7.6vw,110px);
+  line-height:.72;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.product-copy{
+  position:relative;
+  z-index:2;
+  max-width:390px;
+  color:#aaa9a3;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.product-right{
+  border-left:1px solid var(--darkLine);
+  padding:65px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.preview-heading{
+  color:#73787d;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  margin-bottom:22px;
+}
+
+.preview-list{
+  border-top:1px solid var(--darkLine);
+}
+
+.preview-row{
+  display:grid;
+  grid-template-columns:42px 1fr auto;
+  align-items:center;
+  gap:15px;
+  padding:23px 0;
+  border-bottom:1px solid var(--darkLine);
+  transition:
+    padding .35s ease,
+    color .3s ease;
+}
+
+.preview-row:hover{
+  padding-left:10px;
+  color:#fff;
+}
+
+.preview-row .num{
+  color:#62676c;
+  font-size:9px;
+}
+
+.preview-row h4{
+  font-size:14px;
+  font-weight:400;
+}
+
+.preview-row small{
+  color:#62676c;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+/* ================= CURRICULUM ================= */
+
+.curriculum{
+  padding:180px 0;
+}
+
+.curriculum-head{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:100px;
+  margin-bottom:95px;
+}
+
+.curriculum-title{
+  font-size:clamp(66px,8.5vw,120px);
+  line-height:.74;
+  letter-spacing:-.1em;
+  font-weight:500;
+}
+
+.curriculum-copy{
+  max-width:350px;
+  padding-top:12px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+
+.lesson-list{
+  border-top:1px solid var(--ink);
+}
+
+.lesson{
+  display:grid;
+  grid-template-columns:70px 1fr auto;
+  align-items:center;
+  gap:25px;
+  padding:34px 0;
+  border-bottom:1px solid var(--ink);
+  transition:
+    padding .35s ease,
+    background .35s ease;
+}
+
+.lesson:hover{
+  padding-left:12px;
+  padding-right:12px;
+  background:rgba(255,255,255,.2);
+}
+
+.lesson-number{
+  font-size:9px;
+  color:var(--muted);
+}
+
+.lesson-name{
+  font-size:23px;
+  letter-spacing:-.04em;
+}
+
+.lesson-type{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  color:var(--muted);
+}
+
+/* ================= OUTCOMES ================= */
+
+.outcomes{
+  background:var(--dark);
+  color:var(--paper);
+  padding:180px 0;
+}
+
+.outcomes-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:115px;
+}
+
+.outcomes-title{
+  font-size:clamp(65px,8.8vw,125px);
+  line-height:.73;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.outcomes-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.outcome-list{
+  border-top:1px solid var(--darkLine);
+}
+
+.outcome{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:15px;
+  padding:28px 0;
+  border-bottom:1px solid var(--darkLine);
+}
+
+.outcome-number{
+  font-size:9px;
+  color:#62676c;
+}
+
+.outcome p{
+  color:#c7c4bc;
+  font-size:16px;
+  line-height:1.5;
+}
+
+/* ================= FAQ ================= */
+
+.faq{
+  padding:180px 0;
+}
+
+.faq-head{
+  margin-bottom:95px;
+}
+
+.faq-title{
+  margin-top:36px;
+  font-size:clamp(72px,9.1vw,132px);
+  line-height:.72;
+  letter-spacing:-.105em;
+  font-weight:500;
+}
+
+.faq-list{
+  max-width:920px;
+  margin-left:auto;
+  border-top:1px solid var(--ink);
+}
+
+.faq-item{
+  border-bottom:1px solid var(--ink);
+}
+
+.faq-question{
+  width:100%;
+  border:0;
+  background:none;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  text-align:left;
+  color:var(--ink);
+  padding:30px 0;
+  font-size:19px;
+}
+
+.faq-symbol{
+  font-size:21px;
+  transition:transform .35s ease;
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .45s ease;
+}
+
+.faq-answer p{
+  max-width:700px;
+  padding:0 0 30px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.faq-item.active .faq-symbol{
+  transform:rotate(45deg);
+}
+
+/* ================= FINAL ================= */
+
+.final{
+  min-height:92vh;
+  background:var(--paper2);
+  display:flex;
+  align-items:center;
+  padding:125px 0;
+}
+
+.final-title{
+  max-width:1160px;
+  margin:44px 0 65px;
+  font-size:clamp(76px,12.1vw,182px);
+  line-height:.68;
+  letter-spacing:-.11em;
+  font-weight:500;
+}
+
+.final-title em{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  background:var(--dark);
+  color:var(--paper);
+  padding:38px 0;
+}
+
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  color:#70757a;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+}
+
+.footer-links{
+  display:flex;
+  gap:25px;
+}
+
+.footer-links a{
+  transition:.25s ease;
+}
+
+.footer-links a:hover{
+  color:var(--paper);
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .container{
+    width:calc(100% - 32px);
+  }
+
+  .nav{
+    padding:21px 0;
+  }
+
+  .nav-link{
+    display:none;
+  }
+
+  .hero{
+    min-height:94vh;
+    padding:125px 0 50px;
+  }
+
+  .hero-grid,
+  .intro-grid,
+  .statement-grid,
+  .method-head,
+  .course-head,
+  .curriculum-head,
+  .outcomes-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-grid{
+    gap:55px;
+  }
+
+  .hero-title{
+    font-size:clamp(69px,19vw,125px);
+  }
+
+  .hero-art{
+    width:340px;
+    height:340px;
+    right:-175px;
+    top:23%;
+  }
+
+  .hero-art::after{
+    font-size:140px;
+  }
+
+  .hero-axis{
+    display:none;
+  }
+
+  .intro,
+  .statement,
+  .method,
+  .course,
+  .curriculum,
+  .outcomes,
+  .faq{
+    padding:105px 0;
+  }
+
+  .intro-grid{
+    gap:40px;
+  }
+
+  .intro-title{
+    font-size:49px;
+  }
+
+  .statement-grid{
+    gap:60px;
+  }
+
+  .statement-title{
+    font-size:62px;
+  }
+
+  .method-head{
+    gap:40px;
+    margin-bottom:60px;
+  }
+
+  .method-copy{
+    max-width:330px;
+  }
+
+  .method-item{
+    grid-template-columns:35px 1fr;
+    gap:15px;
+  }
+
+  .method-item p{
+    grid-column:2;
+  }
+
+  .method-item:hover{
+    padding-left:0;
+    padding-right:0;
+    background:none;
+  }
+
+  .visual-section{
+    padding-bottom:105px;
+  }
+
+  .visual{
+    min-height:610px;
+    padding:32px;
+  }
+
+  .visual-frame{
+    left:8%;
+    top:13%;
+    width:84%;
+    height:55%;
+  }
+
+  .visual-line{
+    width:175px;
+    left:16%;
+  }
+
+  .visual-title{
+    font-size:69px;
+  }
+
+  .course-head{
+    gap:45px;
+    margin-bottom:60px;
+  }
+
+  .course-product{
+    grid-template-columns:1fr;
+  }
+
+  .product-left{
+    min-height:500px;
+    padding:35px;
+  }
+
+  .product-right{
+    border-left:0;
+    border-top:1px solid var(--darkLine);
+    padding:35px;
+  }
+
+  .curriculum-head{
+    gap:40px;
+  }
+
+  .lesson{
+    grid-template-columns:35px 1fr;
+  }
+
+  .lesson-type{
+    grid-column:2;
+  }
+
+  .lesson:hover{
+    padding-left:0;
+    padding-right:0;
+    background:none;
+  }
+
+  .outcomes-grid{
+    gap:65px;
+  }
+
+  .faq-title{
+    font-size:70px;
+  }
+
+  .final{
+    min-height:78vh;
+  }
+
+  .final-title{
+    font-size:76px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .footer-links{
+    flex-wrap:wrap;
+  }
+}
+
+@media(max-width:430px){
+
+  .hero-title{
+    font-size:20vw;
+  }
+
+  .hero-side p{
+    font-size:15px;
+  }
+
+  .intro-title{
+    font-size:43px;
+  }
+
+  .statement-title{
+    font-size:55px;
+  }
+
+  .visual-title{
+    font-size:61px;
+  }
+
+  .course-title,
+  .curriculum-title,
+  .outcomes-title,
+  .faq-title{
+    font-size:60px;
+  }
+
+  .product-title{
+    font-size:61px;
+  }
+
+  .final-title{
+    font-size:66px;
+  }
+
+  .preview-row{
+    grid-template-columns:30px 1fr;
+  }
+
+  .preview-row small{
+    grid-column:2;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav class="nav">
+  <div class="container nav-inner">
+
+    <a href="#" class="logo">
+      AURUM<span>.</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="#method" class="nav-link">Method</a>
+      <a href="#course" class="nav-link">Course</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#start" class="nav-cta">Start →</a>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+  <div class="hero-art">
+    <div class="hero-mark"></div>
+  </div>
+
+  <div class="hero-axis"></div>
+
+  <div class="container hero-grid">
+
+    <div class="reveal">
+
+      <div class="hero-kicker">
+        <i></i>
+        Creator education experience / 2026
+      </div>
+
+      <h1 class="hero-title">
+        BUILD<br>
+        WORK<br>
+        <em>that matters.</em>
+      </h1>
+
+    </div>
+
+    <div class="hero-side reveal">
+
+      <p>
+        A practical system for turning your knowledge,
+        ideas and audience into meaningful work.
+      </p>
+
+      <a href="#course" class="button">
+        Explore the program
+        <span>↗</span>
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- TICKER -->
+
+<div class="ticker">
+  <div class="ticker-track">
+
+    <span>Position</span>
+    <span>Product</span>
+    <span>Content</span>
+    <span>Conversion</span>
+    <span>Delivery</span>
+    <span>Systems</span>
+
+    <span>Position</span>
+    <span>Product</span>
+    <span>Content</span>
+    <span>Conversion</span>
+    <span>Delivery</span>
+    <span>Systems</span>
+
+  </div>
+</div>
+
+
+<!-- INTRO -->
+
+<section class="intro">
+
+  <div class="container intro-grid">
+
+    <div class="label reveal">
+      01 / The idea
+    </div>
+
+    <div class="reveal">
+
+      <h2 class="intro-title">
+        Your knowledge is valuable.
+        <em>Your system makes it scalable.</em>
+      </h2>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STATEMENT -->
+
+<section class="statement">
+
+  <div class="container statement-grid">
+
+    <div class="reveal">
+
+      <h2 class="statement-title">
+        Stop<br>
+        creating<br>
+        <em>without direction.</em>
+      </h2>
+
+    </div>
+
+    <div class="statement-copy reveal">
+
+      <p>
+        Most creators don't need more random content.
+        They need a clearer offer, a stronger point of view
+        and a system that connects their ideas to an actual product.
+      </p>
+
+      <div class="rule"></div>
+
+      <div class="label">
+        The AURUM method
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- METHOD -->
+
+<section class="method" id="method">
+
+  <div class="container">
+
+    <div class="method-head reveal">
+
+      <h2 class="method-title">
+        The<br>
+        method.
+      </h2>
+
+      <p class="method-copy">
+        Six principles designed to take you from scattered
+        ideas to a focused creator business.
+      </p>
+
+    </div>
+
+    <div class="method-list">
+
+      <div class="method-item reveal">
+        <div class="method-number">01</div>
+        <h3>Position</h3>
+        <p>
+          Define what you stand for, who you help and
+          why your perspective deserves attention.
+        </p>
+      </div>
+
+      <div class="method-item reveal">
+        <div class="method-number">02</div>
+        <h3>Package</h3>
+        <p>
+          Turn knowledge into a clear offer people can
+          understand, remember and act on.
+        </p>
+      </div>
+
+      <div class="method-item reveal">
+        <div class="method-number">03</div>
+        <h3>Publish</h3>
+        <p>
+          Build a repeatable content system around ideas
+          that support your bigger direction.
+        </p>
+      </div>
+
+      <div class="method-item reveal">
+        <div class="method-number">04</div>
+        <h3>Convert</h3>
+        <p>
+          Create a journey that moves the right audience
+          from attention toward action.
+        </p>
+      </div>
+
+      <div class="method-item reveal">
+        <div class="method-number">05</div>
+        <h3>Deliver</h3>
+        <p>
+          Design an experience that makes your product
+          feel as valuable as the promise.
+        </p>
+      </div>
+
+      <div class="method-item reveal">
+        <div class="method-number">06</div>
+        <h3>Compound</h3>
+        <p>
+          Build systems that become more useful as your
+          audience, knowledge and catalogue grow.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- VISUAL STORY -->
+
+<section class="visual-section">
+
+  <div class="container">
+
+    <div class="visual reveal">
+
+      <div class="visual-grid"></div>
+      <div class="visual-frame"></div>
+      <div class="visual-line"></div>
+
+      <div class="visual-copy">
+
+        <div class="visual-label">
+          A creator operating system
+        </div>
+
+        <h2 class="visual-title">
+          Build<br>
+          the thing<br>
+          <em>behind</em><br>
+          the content.
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- COURSE -->
+
+<section class="course" id="course">
+
+  <div class="container">
+
+    <div class="course-head reveal">
+
+      <h2 class="course-title">
+        Inside<br>
+        <em>AURUM.</em>
+      </h2>
+
+      <div class="course-copy">
+
+        <p>
+          A six-part creator business program built around
+          clarity, positioning, product, content and execution.
+        </p>
+
+        <div class="course-meta">
+
+          <div class="meta">
+            <strong>06</strong>
+            <span>Chapters</span>
+          </div>
+
+          <div class="meta">
+            <strong>20+</strong>
+            <span>Lessons</span>
+          </div>
+
+          <div class="meta">
+            <strong>∞</strong>
+            <span>Iterations</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="course-product reveal">
+
+      <div class="product-left">
+
+        <div class="product-tag">
+          Flagship program / concept
+        </div>
+
+        <h3 class="product-title">
+          Build<br>
+          your<br>
+          system.
+        </h3>
+
+        <p class="product-copy">
+          Learn how to connect your ideas, audience and
+          expertise into one coherent digital product ecosystem.
+        </p>
+
+      </div>
+
+
+      <div class="product-right">
+
+        <div class="preview-heading">
+          Lesson preview
+        </div>
+
+        <div class="preview-list">
+
+          <div class="preview-row">
+            <span class="num">01</span>
+            <h4>Find Your Position</h4>
+            <small>12 min</small>
+          </div>
+
+          <div class="preview-row">
+            <span class="num">02</span>
+            <h4>Build the Offer</h4>
+            <small>18 min</small>
+          </div>
+
+          <div class="preview-row">
+            <span class="num">03</span>
+            <h4>Create Your Content System</h4>
+            <small>21 min</small>
+          </div>
+
+          <div class="preview-row">
+            <span class="num">04</span>
+            <h4>Design the Conversion Journey</h4>
+            <small>16 min</small>
+          </div>
+
+          <div class="preview-row">
+            <span class="num">05</span>
+            <h4>Build the Experience</h4>
+            <small>24 min</small>
+          </div>
+
+          <div class="preview-row">
+            <span class="num">06</span>
+            <h4>Create for the Long Game</h4>
+            <small>19 min</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CURRICULUM -->
+
+<section class="curriculum">
+
+  <div class="container">
+
+    <div class="curriculum-head reveal">
+
+      <h2 class="curriculum-title">
+        Six<br>
+        chapters.
+      </h2>
+
+      <p class="curriculum-copy">
+        No filler. Each chapter moves one important
+        part of the system forward.
+      </p>
+
+    </div>
+
+    <div class="lesson-list">
+
+      <div class="lesson reveal">
+        <div class="lesson-number">01</div>
+        <div class="lesson-name">Find Your Position</div>
+        <div class="lesson-type">Clarity</div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lesson-number">02</div>
+        <div class="lesson-name">Build the Offer</div>
+        <div class="lesson-type">Product</div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lesson-number">03</div>
+        <div class="lesson-name">Create Your Content System</div>
+        <div class="lesson-type">Audience</div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lesson-number">04</div>
+        <div class="lesson-name">Design the Conversion Journey</div>
+        <div class="lesson-type">Growth</div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lesson-number">05</div>
+        <div class="lesson-name">Build the Experience</div>
+        <div class="lesson-type">Delivery</div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lesson-number">06</div>
+        <div class="lesson-name">Create for the Long Game</div>
+        <div class="lesson-type">Systems</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- OUTCOMES -->
+
+<section class="outcomes">
+
+  <div class="container outcomes-grid">
+
+    <div class="reveal">
+
+      <h2 class="outcomes-title">
+        Leave with<br>
+        something<br>
+        <em>real.</em>
+      </h2>
+
+    </div>
+
+    <div class="outcome-list">
+
+      <div class="outcome reveal">
+        <div class="outcome-number">01</div>
+        <p>A clearer creator positioning and point of view.</p>
+      </div>
+
+      <div class="outcome reveal">
+        <div class="outcome-number">02</div>
+        <p>A structured offer built around your strongest knowledge.</p>
+      </div>
+
+      <div class="outcome reveal">
+        <div class="outcome-number">03</div>
+        <p>A content system connected to a bigger business goal.</p>
+      </div>
+
+      <div class="outcome reveal">
+        <div class="outcome-number">04</div>
+        <p>A customer journey designed around clarity rather than noise.</p>
+      </div>
+
+      <div class="outcome reveal">
+        <div class="outcome-number">05</div>
+        <p>A repeatable system you can continue building on.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="faq" id="faq">
+
+  <div class="container">
+
+    <div class="faq-head reveal">
+
+      <div class="label">
+        05 / Questions
+      </div>
+
+      <h2 class="faq-title">
+        Before<br>
+        you begin.
+      </h2>
+
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+          <span>Who is AURUM for?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            AURUM is designed as a concept for creators,
+            educators and experts who want to turn their
+            knowledge into a structured digital offer.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+          <span>Is this beginner friendly?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            The framework starts with fundamentals and
+            gradually moves toward product, content,
+            conversion and delivery.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+          <span>How is the program structured?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            The concept contains six chapters, each focused
+            on one part of the creator-business system.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+          <span>Can the course grow over time?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            A real implementation could add new modules,
+            lessons, resources, community features and
+            supporting products over time.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+
+<section class="final" id="start">
+
+  <div class="container reveal">
+
+    <div class="label">
+      06 / Your next chapter
+    </div>
+
+    <h2 class="final-title">
+      Build work<br>
+      worth <em>remembering.</em>
+    </h2>
+
+    <a href="#course" class="button">
+      Explore AURUM
+      <span>↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="container footer-inner">
+
+    <div>
+      AURUM / CONCEPT COURSE EXPERIENCE
+    </div>
+
+    <div class="footer-links">
+      <a href="#method">Method</a>
+      <a href="#course">Course</a>
+      <a href="#faq">FAQ</a>
+      <a href="#start">Start</a>
+    </div>
+
+    <div>
+      © 2026
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+/* ================= SCROLL REVEAL ================= */
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+},{
+  threshold:.1
+});
+
+reveals.forEach(item=>{
+  observer.observe(item);
+});
+
+
+/* ================= FAQ ================= */
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item=>{
+
+  const question = item.querySelector(".faq-question");
+  const answer = item.querySelector(".faq-answer");
+
+  question.addEventListener("click",()=>{
+
+    const isOpen = item.classList.contains("active");
+
+    faqItems.forEach(other=>{
+      other.classList.remove("active");
+      other.querySelector(".faq-answer").style.maxHeight = null;
+    });
+
+    if(!isOpen){
+
+      item.classList.add("active");
+
+      answer.style.maxHeight =
+        answer.scrollHeight + "px";
+
+    }
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
